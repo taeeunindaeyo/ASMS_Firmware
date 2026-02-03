@@ -14,4 +14,6 @@
 
 void GPIO_Init(void);
 
+void blink_fast(int n);
+
 #endif

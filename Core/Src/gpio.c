@@ -18,3 +18,12 @@ void GPIO_Init(void) {
 		CE_LOW(); // TX Stby
 		LED_OFF();
 }
+
+void blink_fast(int n) {
+    for(int i=0; i<n; i++){
+        LED_ON();
+        Delay_ms(200); // busy_delay 대신 태은님 Delay 사용
+        LED_OFF();
+        Delay_ms(200);
+    }
+}
