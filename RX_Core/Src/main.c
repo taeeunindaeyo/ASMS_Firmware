@@ -1,53 +1,69 @@
-#include "nrf24l01p.h"
-#include "gpio.h"
-#include "spi.h"
-#include "delay.h"
+#include "main.h"
+#include <stdio.h>
+#include <string.h>
 
-static uint8_t ADDR[5] = {0xB0, 0xB1, 0xB2, 0xB3, 0xB4};
+int main(void)
+{
+    SystemClock_Config();
+    Delay_ms(100);
+    GPIO_Init();
+    USART1_Init();
+    SPI1_Init();
 
-void nRF_Init_RX(void) {
-    CE_LOW();
-    nRF_WriteReg(NRF_CONFIG, 0x0B);      // RX Mode, Power Up
-    Delay_ms(2);
+    USART1_SendString("\r\n=== ASMS 수신기 입니당 ===\r\n");
 
-    nRF_WriteReg(NRF_EN_AA, 0x02);       // Pipe 1 Auto-ACK
-    nRF_WriteReg(NRF_EN_RXADDR, 0x02);   // Pipe 1 Enable
-    nRF_WriteReg(NRF_SETUP_AW, 0x03);    // 5 Bytes Address
-    nRF_WriteReg(NRF_RF_CH, 76);         // Channel 76
-    nRF_WriteReg(NRF_RF_SETUP, 0x0E);    // 2Mbps
+    nRF_Init_RX();
+    nRF_LoadAckPayload((uint8_t*)"RX_READY", 8);
 
-    // Dynamic Payload & ACK Payload 활성화
-    nRF_WriteReg(NRF_FEATURE, 0x06);     // EN_DPL, EN_ACK_PAY
-    nRF_WriteReg(NRF_DYNPD, 0x03);       // Pipe 0, 1 Dynamic
+    uint8_t rx_data[32];
+    char msg[64];
+    char reply[32];
+    int16_t joy_x, joy_y;
 
-    nRF_WriteBuf(NRF_RX_ADDR_P1, ADDR, 5);
+    while (1)
+    {
+        // 데이터 수신 확인
+        if (nRF_ReadReg(NRF_STATUS) & 0x40)
+        {
+            LED_ON();
 
-    CE_HIGH(); // 수신 대기 시작
-}
+            // 데이터 읽기
+            memset(rx_data, 0, 32);
+            nRF_ReceivePacket(rx_data);
 
-void nRF_LoadAckPayload(uint8_t *data, uint8_t len) {
-    // Pipe 1번에 답장 장전 (0xA8 | 0x01 = 0xA9)
-    CSN_LOW();
-    SPI1_Transfer(0xA9);
-    for(int i=0; i<len; i++) SPI1_Transfer(data[i]);
-    CSN_HIGH();
-}
+            uint8_t mode = rx_data[0];
 
-void nRF_ReceivePacket(uint8_t *rx_buf) {
-    CSN_LOW();
-    SPI1_Transfer(NRF_R_RX_PAYLOAD);
-    for(int i=0; i<32; i++) rx_buf[i] = SPI1_Transfer(0xFF);
-    CSN_HIGH();
+            // 모드별 처리
+            if (mode == 2) // MANUAL
+            {
+                joy_x = (int16_t)((rx_data[3] << 8) | rx_data[2]);
+                joy_y = (int16_t)((rx_data[5] << 8) | rx_data[4]);
+                sprintf(msg, "[수동주행] X:%d, Y:%d\r\n", joy_x, joy_y);
+                sprintf(reply, "M:OK");
+            }
+            else if (mode == 3) // ESTOP
+            {
+                sprintf(msg, "[비상정지]\r\n");
+                sprintf(reply, "E:OK");
+            }
+            else if (mode == 1) // AUTO
+            {
+                sprintf(msg, "[자율주행]\r\n");
+                sprintf(reply, "A:OK");
+            }
+            else
+            {
+                sprintf(msg, "[NONE]\r\n");
+                sprintf(reply, "NONE");
+            }
 
-    nRF_WriteReg(NRF_FLUSH_RX, 0xFF);
-}
+            // 결과 출력 및 답장 장전
+            USART1_SendString(msg);
+            nRF_LoadAckPayload((uint8_t*)reply, strlen(reply));
 
-void nRF_WriteReg(uint8_t reg, uint8_t value) {
-    CSN_LOW(); SPI1_Transfer(reg | 0x20); SPI1_Transfer(value); CSN_HIGH();
-}
-uint8_t nRF_ReadReg(uint8_t reg) {
-    uint8_t val; CSN_LOW(); SPI1_Transfer(reg & 0x1F); val = SPI1_Transfer(0xFF); CSN_HIGH(); return val;
-}
-void nRF_WriteBuf(uint8_t reg, uint8_t *b, uint8_t l) {
-    CSN_LOW(); SPI1_Transfer(reg | 0x20); for(int i=0; i<l; i++) SPI1_Transfer(b[i]); CSN_HIGH();
+            // 인터럽트 클리어
+            nRF_WriteReg(NRF_STATUS, 0x40);
+            LED_OFF();
+        }
+    }
 }
