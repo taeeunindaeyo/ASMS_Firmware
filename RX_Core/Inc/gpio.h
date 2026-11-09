@@ -9,11 +9,14 @@
 #define CE_LOW()      (GPIOA->BRR = GPIO_BRR_BR3)
 #define CE_HIGH()     (GPIOA->BSRR = GPIO_BSRR_BS3)
 
+// W5500 (PA8)
+#define CS_LOW()    (GPIOA->BRR = GPIO_BRR_BR8)
+#define CS_HIGH()   (GPIOA->BSRR = GPIO_BSRR_BS8)
+
 #define LED_ON()      (GPIOC->BRR = GPIO_BRR_BR13)
 #define LED_OFF()     (GPIOC->BSRR = GPIO_BSRR_BS13)
 
 void GPIO_Init(void);
-
 void blink_fast(int n);
 
 #endif

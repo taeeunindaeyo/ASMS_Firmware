@@ -272,7 +272,7 @@ typedef   int16_t   datasize_t;     ///< sent or received data size
 
 #define QSPI_SINGLE_MODE            (0x00 << 6) // 0b0000 0000 // 0x00
 #define QSPI_DUAL_MODE              (0x01 << 6) // 0b0100 0000 // 0x40
-#define QSPI_QUAD_MODE              (0x02 << 6) // 0b1000 0000 // 0x80 
+#define QSPI_QUAD_MODE              (0x02 << 6) // 0b1000 0000 // 0x80
 
 #ifndef _WIZCHIP_QSPI_MODE_
 #define _WIZCHIP_QSPI_MODE_          QSPI_SINGLE_MODE
@@ -286,7 +286,7 @@ typedef   int16_t   datasize_t;     ///< sent or received data size
 typedef   uint8_t   iodata_t;       ///< IO access unit. bus width
 typedef   int16_t   datasize_t;     ///< sent or received data size
 #include "./W6300/w6300.h"
-#include "../Application/Application.h"
+#include "Application.h"
 
 #else
 #error "Unknown defined _WIZCHIP_. You should define one of 5100, 5200, 5300, 5500, 6100 and 6300!!!"
@@ -614,7 +614,7 @@ typedef enum {
 #endif
 
 #define PHY_CONFBY_HW            0     ///< Configured PHY operation mode by HW pin
-#define PHY_CONFBY_SW            1     ///< Configured PHY operation mode by SW register   
+#define PHY_CONFBY_SW            1     ///< Configured PHY operation mode by SW register
 #define PHY_MODE_MANUAL          0     ///< Configured PHY operation mode with user setting.
 #define PHY_MODE_AUTONEGO        1     ///< Configured PHY operation mode with auto-negotiation
 #define PHY_SPEED_10             0     ///< Link Speed 10
@@ -624,7 +624,7 @@ typedef enum {
 #define PHY_LINK_OFF             0     ///< Link Off
 #define PHY_LINK_ON              1     ///< Link On
 #define PHY_POWER_NORM           0     ///< PHY power normal mode
-#define PHY_POWER_DOWN           1     ///< PHY power down mode 
+#define PHY_POWER_DOWN           1     ///< PHY power down mode
 
 
 //teddy 240122

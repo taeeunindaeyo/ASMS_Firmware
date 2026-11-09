@@ -118,7 +118,7 @@ extern "C" {
     SOCKET FLAG
 */
 #define SF_ETHER_OWN           (Sn_MR_MFEN)        ///< In @ref Sn_MR_MACRAW, Receive only the packet as broadcast, multicast and own packet
-#define SF_IGMP_VER2           (Sn_MR_MC)          ///< In @ref Sn_MR_UDP with \ref SF_MULTI_ENABLE, Select IGMP version 2.   
+#define SF_IGMP_VER2           (Sn_MR_MC)          ///< In @ref Sn_MR_UDP with \ref SF_MULTI_ENABLE, Select IGMP version 2.
 #define SF_TCP_NODELAY         (Sn_MR_ND)          ///< In @ref Sn_MR_TCP, Use to nodelayed ack.
 #define SF_MULTI_ENABLE        (Sn_MR_MULTI)       ///< In @ref Sn_MR_UDP, Enable multicast mode.
 
@@ -193,12 +193,12 @@ extern "C" {
 #define SF_TCP_FPSH          (Sn_MR_FPSH)       ///< In TCP mode such as @ref Sn_MR_TCP4, @ref Sn_MR_TCP6 and @ref Sn_MR_TCPD, Use to forced push flag.
 
 #define SF_TCP_NODELAY       (Sn_MR_ND)       ///< In TCP mode such as @ref Sn_MR_TCP4, @ref Sn_MR_TCP6 and @ref Sn_MR_TCPD, Use to nodelayed ack.
-#define SF_IGMP_VER2         (Sn_MR_MC)       ///< In UDP mode such as @ref Sn_MR_UDP4 with @ref SF_MULTI_ENABLE, Select IGMP version 2.   
+#define SF_IGMP_VER2         (Sn_MR_MC)       ///< In UDP mode such as @ref Sn_MR_UDP4 with @ref SF_MULTI_ENABLE, Select IGMP version 2.
 #define SF_SOLICIT_BLOCK     (Sn_MR_SMB)      ///< In UDP mode such as @ref Sn_MR_UDP6 and @ref Sn_MR_UDPD, Block a solicited mutlicast packet.
-#define SF_ETHER_MULTI4B     (Sn_MR_MMB4)     ///< In MACRAW mode such as @ref Sn_MR_MACRAW with @ref SF_MULTI_ENABLE, Block a IPv4 multicast packet. 
+#define SF_ETHER_MULTI4B     (Sn_MR_MMB4)     ///< In MACRAW mode such as @ref Sn_MR_MACRAW with @ref SF_MULTI_ENABLE, Block a IPv4 multicast packet.
 
-#define SF_UNI_BLOCK         (Sn_MR_UNIB)     ///< In UDP mdoe such as @ref Sn_MR_UDP4, @ref Sn_MR_UDP6 and @ref Sn_MR_UDPD with @ref SF_MULTI_ENABLE, Block a unicast packet. 
-#define SF_ETHER_MULIT6B     (Sn_MR_MMB6)     ///< In MACRAW mode such as @ref Sn_MR_MACRAW with @ref SF_MULTI_ENABLE, Block a IPv6 multicast packet. 
+#define SF_UNI_BLOCK         (Sn_MR_UNIB)     ///< In UDP mdoe such as @ref Sn_MR_UDP4, @ref Sn_MR_UDP6 and @ref Sn_MR_UDPD with @ref SF_MULTI_ENABLE, Block a unicast packet.
+#define SF_ETHER_MULIT6B     (Sn_MR_MMB6)     ///< In MACRAW mode such as @ref Sn_MR_MACRAW with @ref SF_MULTI_ENABLE, Block a IPv6 multicast packet.
 
 /**
     @brief Force to APR.
@@ -235,7 +235,7 @@ extern "C" {
 
 #define TCPSOCK_MODE         (Sn_ESR_TCPM)         ///< It indicates the IP version when SOCKETn is opened as TCP6 or TCPD mode.(0 - IPv4 , 1 - IPv6)
 #define TCPSOCK_OP           (Sn_ESR_TCPOP)        ///< It indicates the operation mode when SOCKETn is connected.(0 - <b>TCP CLIENT</b> , 1 - <b>TCP SERVER</b>)
-#define TCPSOCK_SIP          (Sn_ESR_IP6T)         ///< It indicates the source ip address type when SOCKET is connected. (0 - Link Local, 1 - Global Unique) 
+#define TCPSOCK_SIP          (Sn_ESR_IP6T)         ///< It indicates the source ip address type when SOCKET is connected. (0 - Link Local, 1 - Global Unique)
 
 /////////////////////////////
 // SOCKET CONTROL & OPTION //
@@ -732,5 +732,3 @@ int32_t recvfrom_W6x00(uint8_t sn, uint8_t * buf, uint16_t len, uint8_t * addr, 
 #endif
 
 #endif   // _SOCKET_H_
-
-

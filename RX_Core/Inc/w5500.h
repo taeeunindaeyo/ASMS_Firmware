@@ -1157,7 +1157,7 @@ extern "C" {
 //#define SOCK_PPPOE                   0x5F
 
 /* IP PROTOCOL */
-#define IPPROTO_IP                   0        //< Dummy for IP 
+#define IPPROTO_IP                   0        //< Dummy for IP
 #define IPPROTO_ICMP                 1        //< Control message protocol
 #define IPPROTO_IGMP                 2        //< Internet group management protocol
 #define IPPROTO_GGP                  3        //< Gateway^2 (deprecated)
