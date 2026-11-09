@@ -147,7 +147,7 @@ uint8_t sock_remained_byte[_WIZCHIP_SOCK_NUM_] = {0,}; // set by wiz_recv_data()
 
 #define Sn_MR_TCP4           (Sn_MR_TCP)   ///< Refer to @ref Sn_MR_TCP.
 #define Sn_MR_UDP4           (Sn_MR_UDP)   ///< Refer to @ref Sn_MR_UDP
-#define Sn_MR_IPRAW4         (Sn_MR_IPRAW)   ///< Refer to @ref Sn_MR_IPRAW.   
+#define Sn_MR_IPRAW4         (Sn_MR_IPRAW)   ///< Refer to @ref Sn_MR_IPRAW.
 #define Sn_MR_TCP6           (0x09)
 #define Sn_MR_UDP6           (0x0A) //0x1010
 #define Sn_MR_IPRAW6         (0x0B) //0x1011
@@ -159,7 +159,7 @@ uint8_t sock_remained_byte[_WIZCHIP_SOCK_NUM_] = {0,}; // set by wiz_recv_data()
 #endif
 
 
-#if 0 // By lihan  
+#if 0 // By lihan
 static uint8_t addrlenTEST = -1 ;
 
 void setAddrlen_W6x00(uint8_t num) {
