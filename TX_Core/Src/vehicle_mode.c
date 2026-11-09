@@ -4,9 +4,9 @@
 Mode vehicle_decide_mode(uint8_t a, uint8_t m, uint8_t e)
 {
     if (e) return MODE_ESTOP;
-    if (m) return MODE_MANUAL;
+    if (m) return MODE_AUTO;
     if (a) return MODE_AUTO;
-    return MODE_NONE;
+    return MODE_MANUAL;
 }
 
 void vehicle_oled_show_mode(Mode md)
