@@ -9,8 +9,8 @@
  */
 typedef struct
 {
-    uint16_t x_raw;   // PA0
-    uint16_t y_raw;   // PA1
+    uint16_t x_raw;   // PA1 (축 교환: 논리 X)
+    uint16_t y_raw;   // PA0 (축 교환: 논리 Y)
 } JoystickRaw;
 
 /*

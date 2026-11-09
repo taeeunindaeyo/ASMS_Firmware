@@ -9,4 +9,10 @@
 #include "spi.h"
 #include "nrf24l01p.h"
 
+#include "i2c.h"
+#include "oled.h"
+#include "sw_handler.h"
+#include "vehicle_mode.h"
+#include "joystick.h"
+
 #endif

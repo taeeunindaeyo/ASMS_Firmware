@@ -13,7 +13,6 @@
 #define LED_OFF()     (GPIOC->BSRR = GPIO_BSRR_BS13)
 
 void GPIO_Init(void);
-
 void blink_fast(int n);
 
 #endif
